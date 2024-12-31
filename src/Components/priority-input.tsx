@@ -1,5 +1,5 @@
 interface DatePriorityProps {
-  priority:string[];
+  importance:string[];
   priorityInput: (e: string) => void;
   dateInput: (e: Date|null) => void;
 }
@@ -10,7 +10,7 @@ export default function DatePriority(props:DatePriorityProps){
     <div className="importance">
       <label htmlFor="importance"> Priority:</label>
       <select name="priority-array" id="priority" className="options" onChange={(event)=>props.priorityInput(event.target.value)}>
-          {props.priority.map((item, index) => (
+          {props.importance.map((item, index) => (
             <option key={index} value={item}>
               {item}
             </option>
