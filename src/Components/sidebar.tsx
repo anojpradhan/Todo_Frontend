@@ -1,10 +1,19 @@
 import { User } from "lucide-react";
 import { Plus } from "lucide-react";
 import { Search } from "lucide-react";
+import { useNavigate } from "react-router";
 interface SidebarProps{
   onAddButtonClick : ()=>void;
 }
 const Sidebar = (props:SidebarProps) => {
+  const navigate= useNavigate();
+  const handleLogout = () => {
+    // Remove token from localStorage
+    localStorage.removeItem("token");
+    
+    // Navigate to the login page
+    navigate("/login");
+  };
   return (
     <>
       <div className="sidebar">
@@ -14,6 +23,7 @@ const Sidebar = (props:SidebarProps) => {
             <User></User>
           </div>
           <h3>Person_Name</h3>
+          <button onClick={handleLogout}>Logout</button>
         </div>
         <div className="sidebar-items-container">
           <div onClick={props.onAddButtonClick} className="sidebar-items">
