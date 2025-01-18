@@ -2,15 +2,18 @@ import { User } from "lucide-react";
 import { Plus } from "lucide-react";
 import { Search } from "lucide-react";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../context/authcontext";
+import { useContext } from "react";
 interface SidebarProps{
   onAddButtonClick : ()=>void;
 }
 const Sidebar = (props:SidebarProps) => {
   const navigate= useNavigate();
+  const {setToken}= useContext(AuthContext);
   const handleLogout = () => {
     // Remove token from localStorage
     localStorage.removeItem("token");
-    
+    setToken("");
     // Navigate to the login page
     navigate("/login");
   };

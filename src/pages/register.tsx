@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import TodoInput from "../Components/card-input";
 import { useNavigate } from "react-router";
+import { AuthContext } from "../context/authcontext";
 
 export default function Register() {
   const [username, setUsername] = useState("");
@@ -8,6 +9,7 @@ export default function Register() {
   const [phone, setPhone] = useState("");
   const [email, setEmail] = useState("");
   const navigate = useNavigate();
+  const {setToken}= useContext(AuthContext);
   
   const handleRegister= async ()=>{
     try {
@@ -28,7 +30,8 @@ export default function Register() {
         const data = await response.json();
         if(data.token)
           {
-            console.log(data.token);
+            localStorage.setItem("token", data.token);
+            setToken(data.token);
             navigate("/todo");
           }
         }

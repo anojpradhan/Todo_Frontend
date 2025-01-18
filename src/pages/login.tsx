@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import TodoInput from "../Components/card-input";
+import { AuthContext } from "../context/authcontext";
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const {setToken} = useContext(AuthContext)
+
   const navigate = useNavigate()
   
   const handleLogin = async ()=>{
@@ -27,6 +30,7 @@ export default function Login() {
         if(data.token)
           {
             localStorage.setItem("token", data.token);
+            setToken(data.token);
             navigate("/todo");
           }
         }
